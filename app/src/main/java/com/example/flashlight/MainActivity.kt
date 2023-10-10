@@ -1,6 +1,7 @@
 package com.example.flashlight
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         //Mak
         enterButton = findViewById(R.id.enter_button)
         enterText = findViewById(R.id.enter_action)
+
+        //Mak check if does not support flashlight
+        var hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
+        if (!hasFlash)
+            Toast.makeText(this, "Oops! Flashlight not available! Please turn this", Toast.LENGTH_SHORT).show()
 
         toggleLight.setOnCheckedChangeListener{ _, _ ->
         toggleFlashlight()
