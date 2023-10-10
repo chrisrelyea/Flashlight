@@ -6,11 +6,13 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.annotation.RequiresApi
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var toggleLight: ToggleButton
+    private lateinit var toggleLight: SwitchMaterial
     private var cameraManager: CameraManager? = null
     private var getCameraId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         toggleLight = findViewById(R.id.switch1)
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
-        toggleLight.setOnClickListener{
-            toggleFlashlight()
+        toggleLight.setOnCheckedChangeListener{ _, _ ->
+        toggleFlashlight()
         }
         getCameraId = cameraManager!!.cameraIdList[0]
     }
@@ -31,11 +33,14 @@ class MainActivity : AppCompatActivity() {
     private fun toggleFlashlight() {
         if (toggleLight.isChecked) {
             cameraManager!!.setTorchMode(getCameraId!!, true)
+            Toast.makeText(this, "Flashlight On", Toast.LENGTH_SHORT).show()
         }
         else {
             cameraManager!!.setTorchMode(getCameraId!!, false)
+            Toast.makeText(this, "Flashlight Off", Toast.LENGTH_SHORT).show()
 
         }
+
     }
 
 
