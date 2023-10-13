@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     // This direction of the swipe is stored as "direction" variable
     override fun onFling(p0: MotionEvent, p1: MotionEvent, p2: Float, p3: Float): Boolean {
         Log.d("test", "Fling Detected!")
+        Log.d("vertical speed", p3.toString())
 
 
         var x1 = p0.x
@@ -124,7 +125,9 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         var diffY = y2-y1
         var diffX = x2-x1
         var direction = ""
+        var swipeThreshold = 200
 
+        var swipeDistance = abs(diffY)
         direction = if (abs(diffY) > abs(diffX)) {
             if (y2 >= y1) {
                 "DOWN"
@@ -140,12 +143,12 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         }
         Log.d("direction", direction)
         var result = false
-        if (direction == "UP"){
+        if (direction == "UP" && swipeDistance > swipeThreshold && abs(p3).toInt() == 8000){
             toggleLight.isChecked = true
             toggleFlashlight()
 
         }
-        else if (direction == "DOWN") {
+        else if (direction == "DOWN" && swipeDistance > swipeThreshold && abs(p3).toInt() == 8000) {
             toggleLight.isChecked = false
             toggleFlashlight()
         }
