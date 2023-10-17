@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
     //Mak
     private lateinit var enterButton: Button
     private lateinit var enterText: EditText
+    private var isOn: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,10 +70,12 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
     private fun toggleFlashlight() {
         if (toggleLight.isChecked) {
+            isOn = true
             cameraManager!!.setTorchMode(getCameraId!!, true)
             Toast.makeText(this, "Flashlight On", Toast.LENGTH_SHORT).show()
         }
         else {
+            isOn = false
             cameraManager!!.setTorchMode(getCameraId!!, false)
             Toast.makeText(this, "Flashlight Off", Toast.LENGTH_SHORT).show()
 
