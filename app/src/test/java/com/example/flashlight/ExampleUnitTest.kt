@@ -1,7 +1,6 @@
 package com.example.flashlight
 
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**
@@ -11,7 +10,15 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun variablesInitialized(){
+        var newView = ViewModels()
+        assertEquals(newView.cameraManager, null)
+        assertEquals(newView.getCameraId, null)
+    }
+
+    @Test
+    fun testSwipeDistance(){
+        var newView = ViewModels()
+        assertEquals(newView.swipeDistance, 0)
     }
 }
